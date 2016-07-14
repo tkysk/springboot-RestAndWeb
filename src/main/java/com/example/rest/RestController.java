@@ -1,5 +1,7 @@
 package com.example.rest;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -7,19 +9,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Created by saeki on 2016/07/13.
  */
-@org.springframework.web.bind.annotation.RestController
+@Controller
 public class RestController {
 
     String[] names = {"taro","ichiro","hanako","sachiko","goro"};
     String[] mails = {"taro@example.com", "ichi@ex", "hana@mail", "sa@mail", "goro@goro.com"};
 
     @RequestMapping("/rest/{id}")
+    @ResponseBody
     public DataObject index(@PathVariable int id) {
 
         return new DataObject(id, names[id], mails[id]);
     }
 
+    @RequestMapping("/web/{id}")
+    public String showData(@PathVariable int id, Model model) {
+        try {
+            model.addAttribute("object", new DataObject(id, names[id], mails[id]));
+        }
+        catch(NullPointerException e){}
+
+        model.addAttribute("msg","No."+id+" Data");
+
+        return "showdata";
+    }
+
 }
+
 
 class DataObject {
     private int id;
