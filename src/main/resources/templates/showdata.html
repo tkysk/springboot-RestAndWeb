@@ -38,6 +38,9 @@
 <body>
 <h1 th:text="#{content.title}">Page title here</h1>
 <p th:text="${msg}">this is message</p>
+<div th:object="${object}">
+    <p th:text="|*{name}'s mail address is [*{value}].|">whose mail address is ***.</p>
+</div>
 <table th:object="${object}">
     <tr>
         <th>ID</th>
