@@ -37,27 +37,28 @@
 </head>
 <body>
 <h1 th:text="#{content.title}">Page title here</h1>
-<p th:text="${msg}">this is message</p>
-<div th:object="${object}">
+<p th:text="__${genMsg}__">this is message</p>
+<div th:object="${data.get(num)}">
     <p th:text="|*{name}'s mail address is [*{value}].|">whose mail address is ***.</p>
     <p th:text="'ID is ' + (*{id}%2 == 0 ? 'Odd':'Even') + ' Number'">ID is which Odd or Even</p>
     <p th:if="(*{id}%2==0)">It's ODD! ODD, ODD, ODD!!!</p>
     <p th:unless="(*{id}%2==0)">It's Even....</p>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <td th:text="*{id}"></td>
+        </tr>
+        <tr>
+            <th>NAME</th>
+            <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+            <th>MAIL</th>
+            <td th:text="*{value}"></td>
+        </tr>
+    </table>
 </div>
-<table th:object="${object}">
-    <tr>
-        <th>ID</th>
-        <td th:text="*{id}"></td>
-    </tr>
-    <tr>
-        <th>NAME</th>
-        <td th:text="*{name}"></td>
-    </tr>
-    <tr>
-        <th>MAIL</th>
-        <td th:text="*{value}"></td>
-    </tr>
-</table>
 
 
 </body>
